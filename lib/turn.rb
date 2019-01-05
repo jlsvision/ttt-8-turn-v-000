@@ -14,30 +14,35 @@ end
 
 #checks the number to see if 1) the position is already taken and 2)it is an actual number
 def valid_move?(board, index)
-  if index.between?(0,8)
-    true
+  def position_taken?(array,ind)
+  if array[ind] == " " || array [ind] == "" || array[ind] == nil
+    return false
+  else return true
   end
 end
 
-def position_taken?(board, index)
-  if (board[index] == "  "  || board[index] == "" || board[index] == nil)
-    false
+def on_board(num)
+  if num.between?(0, 8) == true
+    return true
   else
-    true
+    return false
   end
 end
 
-def move(board, index, token = "X")
-  board[index] = token
+if (position_taken?)(board, index) == false && (on_board?(index) == true)
+
+def move(board, index, character = "X")
+  board[index] = character
+  return on_board
 end
 
-def turn(board)
+def turn (board)
   puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-
-  if valid_move?(board, index)
-  else
-    turn(board)
-  end
+num = gets.strip
+index = input_to_index(num)
+if valid_move?(board, index) == true
+  move(board, index)
+  display_board(board)
+else
+  turn(board)
 end
